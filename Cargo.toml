@@ -1,9 +1,8 @@
 [package]
-
 name = "electron_rust"
 version = "0.1.0"
-authors = ["Adam Saladino <adam@codingsimply.com>"]
+authors = []
 
 [lib]
-name = "fibonacci"
+name = "lib"
 crate-type = ["dylib"]

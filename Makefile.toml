@@ -1,0 +1,38 @@
+[env]
+DEBUG_DLL_SOURCE = ".\\target\\debug\\lib.dll"
+RELEASE_DLL_SOURCE = ".\\target\\release\\"
+DLL_DESTINATION = ".\\resources\\"
+
+[tasks.copy_debug_dll]
+# /y in this command is a hack and is not part of cp
+script_runner = "@shell"
+description = "Copies debug lib dll into resources folder."
+script = [
+	"cp ${DEBUG_DLL_SOURCE} ${DLL_DESTINATION} /y"
+]
+
+[tasks.checkvar]
+script_runner = "@shell"
+description = "Check the value of variables."
+script = [
+ 	"echo ${DEBUG_DLL_SOURCE}"
+]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.post-build]
+run_task = "copy_debug_dll"
+
+[tasks.clean]
+command = "cargo"
+args = ["clean"]
+
+[tasks.dbuild]
+category = "Build"
+dependencies = [
+		"clean",
+    "build",
+    "post-build",
+]

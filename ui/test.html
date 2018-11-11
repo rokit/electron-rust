@@ -14,7 +14,7 @@
         <div class="top-bar-left">
             <ul class="menu">
                 <li>
-                    <input id="number" type="search" />
+                    <input id="number" type="search" value="2"/>
                 </li>
                 <li>
                     <button type="button" class="button" id="fib">
@@ -63,17 +63,29 @@
 </div>
 
 <script>
-    let ffi = require('ffi-napi');
-    let path = require('path');
+	let ffi = require('ffi-napi');
+	let path = require('path');
+	let dir = "resources/lib";
+	
+	if (path.basename(path.normalize(__dirname + "/..")) == "app.asar") {
+		dir = "resources/resources/lib";
+	}
 
-    let fibonacci = ffi.Library(path.join(__dirname, './target/debug/libfibonacci'), {
-        calc: ['int', ['int']]
-    });
-    document.getElementById('fib').addEventListener('click', () => {
-        document.getElementById('result').innerText =
-            fibonacci.calc(parseInt(document.getElementById('number').value));
-    });
+	let lib = ffi.Library(dir, {
+			fibonacci: ['int', ['int']],
+			different_types: ['float', ['int', 'int']],
+	});
+	var dt = lib.different_types(30, 2);
+	alert(dt);
+	
+	var r = lib.fibonacci(parseInt(document.getElementById('number').value));
+	var fib_result = document.getElementById('result');
+	fib_result.innerText = r;
+	
+	document.getElementById('fib').addEventListener('click', () => {
+			var r = lib.fibonacci(parseInt(document.getElementById('number').value));
+			fib_result.innerText = r;
+	});
 </script>
-
 </body>
 </html>
