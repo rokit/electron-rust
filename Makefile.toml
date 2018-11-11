@@ -3,7 +3,7 @@ DEBUG_DLL_SOURCE = ".\\target\\debug\\lib.dll"
 RELEASE_DLL_SOURCE = ".\\target\\release\\"
 DLL_DESTINATION = ".\\resources\\"
 
-[tasks.copy_debug_dll]
+[tasks.copy_lib]
 # /y in this command is a hack and is not part of cp
 script_runner = "@shell"
 description = "Copies debug lib dll into resources folder."
@@ -23,7 +23,7 @@ command = "cargo"
 args = ["build"]
 
 [tasks.post-build]
-run_task = "copy_debug_dll"
+run_task = "copy_lib"
 
 [tasks.clean]
 command = "cargo"

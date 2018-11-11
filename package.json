@@ -1,16 +1,15 @@
 {
   "name": "electron-rust",
   "version": "1.0.0",
-  "description": "Elctron to rust playground.",
+  "description": "Electron to rust playground.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "build --dir",
     "dist": "build",
-    "postinstall": "electron-builder install-app-deps",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Adam Saladino <adam@codingsimply.com>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "ffi-napi": "^2.4.3"
